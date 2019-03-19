@@ -13,8 +13,8 @@ Zabbix template for calling https://www.speedtest.net and recording the results
 ## Setup and Configuration
 * Link the template to the Zabbix Server host
 * Update the trigger macros if desired
-  * {$TRIGGER_DOWNLOAD_LOW} default: 100MB
-  * {$TRIGGER_UPLOAD_LOW}   default: 8MB
+  * {$TRIGGER_DOWNLOAD_LOW} default: 100Mbps
+  * {$TRIGGER_UPLOAD_LOW}   default: 8Mbps
 
 ### Template Items
 * Check Speed (3hr refresh)
