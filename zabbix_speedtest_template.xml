@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.0</version>
-    <date>2019-03-19T04:26:56Z</date>
+    <date>2019-09-17T03:48:33Z</date>
     <groups>
         <group>
             <name>Templates/Network devices</name>
@@ -13,7 +13,7 @@
             <name>Template Net speedtest.net</name>
             <description>Records internet speeds via calls to speedtest.net&#13;
 &#13;
-v0.9.0 - 2019-03-18</description>
+v0.9.1 - 2019-09-16</description>
             <groups>
                 <group>
                     <name>Templates/Network devices</name>
@@ -21,12 +21,12 @@ v0.9.0 - 2019-03-18</description>
             </groups>
             <applications>
                 <application>
-                    <name>Speed</name>
+                    <name>Internet Speed</name>
                 </application>
             </applications>
             <items>
                 <item>
-                    <name>Download Speed</name>
+                    <name>Speedtest Download</name>
                     <type>18</type>
                     <snmp_community/>
                     <snmp_oid/>
@@ -57,7 +57,7 @@ v0.9.0 - 2019-03-18</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Speed</name>
+                            <name>Internet Speed</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -92,7 +92,7 @@ v0.9.0 - 2019-03-18</description>
                     </master_item>
                 </item>
                 <item>
-                    <name>Host</name>
+                    <name>Speedtest Host</name>
                     <type>18</type>
                     <snmp_community/>
                     <snmp_oid/>
@@ -123,7 +123,7 @@ v0.9.0 - 2019-03-18</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Speed</name>
+                            <name>Internet Speed</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -158,7 +158,7 @@ v0.9.0 - 2019-03-18</description>
                     </master_item>
                 </item>
                 <item>
-                    <name>Latency</name>
+                    <name>Speedtest Latency</name>
                     <type>18</type>
                     <snmp_community/>
                     <snmp_oid/>
@@ -189,7 +189,7 @@ v0.9.0 - 2019-03-18</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Speed</name>
+                            <name>Internet Speed</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -255,7 +255,7 @@ v0.9.0 - 2019-03-18</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Speed</name>
+                            <name>Internet Speed</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -283,7 +283,7 @@ v0.9.0 - 2019-03-18</description>
                     <master_item/>
                 </item>
                 <item>
-                    <name>Upload Speed</name>
+                    <name>Speedtest Upload</name>
                     <type>18</type>
                     <snmp_community/>
                     <snmp_oid/>
@@ -314,7 +314,7 @@ v0.9.0 - 2019-03-18</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Speed</name>
+                            <name>Internet Speed</name>
                         </application>
                     </applications>
                     <valuemap/>

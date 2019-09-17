@@ -6,6 +6,7 @@ Zabbix template for calling https://www.speedtest.net and recording the results
 * [speedtest-cli](https://packages.ubuntu.com/search?keywords=speedtest-cli)
 
 ## Installation
+* Install dependencies
 * Copy the speedtest.sh to your Zabbix ExternalScripts location (default: /usr/lib/zabbix/externalscripts)
 * Make sure the script permissions allow the zabbix server to execute them
 * Import the template file into the Zabbix UI
@@ -18,10 +19,10 @@ Zabbix template for calling https://www.speedtest.net and recording the results
 
 ### Template Items
 * Check Speed (3hr refresh)
-  * Download Speed
-  * Upload Speed
-  * Latency
-  * Host (track which speedtest server gets used)
+  * Speedtest Download
+  * Speedtest Upload
+  * Speedtest Latency
+  * Speedtest Host (track which speedtest server gets used)
 
 ### Template Triggers
 * Download Speed LOW
