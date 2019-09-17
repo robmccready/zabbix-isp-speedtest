@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.0</version>
-    <date>2019-09-17T03:48:33Z</date>
+    <date>2019-09-17T15:02:00Z</date>
     <groups>
         <group>
             <name>Templates/Network devices</name>
@@ -11,9 +11,15 @@
         <template>
             <template>Template Net speedtest.net</template>
             <name>Template Net speedtest.net</name>
-            <description>Records internet speeds via calls to speedtest.net&#13;
+            <description>Monitor internet speed via calls to speedtest.net using speedtest-cli.&#13;
 &#13;
-v0.9.1 - 2019-09-16</description>
+Note: speedtest-cli does not guarantee accuracy but is useful for general trending and notification when large changes to internet access speed happen. See the &quot;Inconsistency&quot; notes on the speedtest-cli readme: https://github.com/sivel/speedtest-cli&#13;
+&#13;
+&#13;
+v1.0.0 - 2019-09-17&#13;
+&#13;
+Maintainer: Rob McCready &lt;rmccready@gmail.com&gt;&#13;
+https://github.com/robmccready/zabbix-plugins</description>
             <groups>
                 <group>
                     <name>Templates/Network devices</name>
@@ -53,7 +59,7 @@ v0.9.1 - 2019-09-16</description>
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description/>
+                    <description>Records download speed (bps)</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -98,7 +104,7 @@ v0.9.1 - 2019-09-16</description>
                     <snmp_oid/>
                     <key>speedtest.host</key>
                     <delay>0</delay>
-                    <history>3d</history>
+                    <history>1w</history>
                     <trends>0</trends>
                     <status>0</status>
                     <value_type>4</value_type>
@@ -119,7 +125,7 @@ v0.9.1 - 2019-09-16</description>
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description/>
+                    <description>Records the host contacted for the speed test</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -131,7 +137,7 @@ v0.9.1 - 2019-09-16</description>
                     <preprocessing>
                         <step>
                             <type>12</type>
-                            <params>$.server.host</params>
+                            <params>$.host</params>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -185,7 +191,7 @@ v0.9.1 - 2019-09-16</description>
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description/>
+                    <description>Records the latency to the host used for the speedtest. Not intended to be as accurate as an ICMP test</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -197,7 +203,73 @@ v0.9.1 - 2019-09-16</description>
                     <preprocessing>
                         <step>
                             <type>12</type>
-                            <params>$.server.latency</params>
+                            <params>$.latency</params>
+                        </step>
+                    </preprocessing>
+                    <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                    <master_item>
+                        <key>speedtest.sh</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Speedtest Message</name>
+                    <type>18</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>speedtest.message</key>
+                    <delay>0</delay>
+                    <history>1w</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>4</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Message regarding status of speedtest run</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Internet Speed</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing>
+                        <step>
+                            <type>12</type>
+                            <params>$.message</params>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -229,7 +301,7 @@ v0.9.1 - 2019-09-16</description>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>speedtest.sh</key>
-                    <delay>3h</delay>
+                    <delay>{$SPEEDTEST_UPDATE_INTERVAL}</delay>
                     <history>1w</history>
                     <trends>0</trends>
                     <status>0</status>
@@ -251,7 +323,7 @@ v0.9.1 - 2019-09-16</description>
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description/>
+                    <description>Output of a speedtest execution. Actual monitoring happens on the dependent items which pull from the JSON fields</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -283,6 +355,72 @@ v0.9.1 - 2019-09-16</description>
                     <master_item/>
                 </item>
                 <item>
+                    <name>Speedtest Success</name>
+                    <type>18</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>speedtest.success</key>
+                    <delay>0</delay>
+                    <history>1w</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Records flag (0=false, 1=true) if speedtest run was successful</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Internet Speed</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing>
+                        <step>
+                            <type>12</type>
+                            <params>$.success</params>
+                        </step>
+                    </preprocessing>
+                    <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                    <master_item>
+                        <key>speedtest.sh</key>
+                    </master_item>
+                </item>
+                <item>
                     <name>Speedtest Upload</name>
                     <type>18</type>
                     <snmp_community/>
@@ -310,7 +448,7 @@ v0.9.1 - 2019-09-16</description>
                     <publickey/>
                     <privatekey/>
                     <port/>
-                    <description/>
+                    <description>Records upload speed (bps)</description>
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
@@ -353,6 +491,10 @@ v0.9.1 - 2019-09-16</description>
             <httptests/>
             <macros>
                 <macro>
+                    <macro>{$SPEEDTEST_UPDATE_INTERVAL}</macro>
+                    <value>3h</value>
+                </macro>
+                <macro>
                     <macro>{$TRIGGER_DOWNLOAD_LOW}</macro>
                     <value>100000000</value>
                 </macro>
@@ -384,7 +526,7 @@ v0.9.1 - 2019-09-16</description>
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Download Speed</name>
+                                <name>Speedtest Download</name>
                                 <host>Template Net speedtest.net</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -406,7 +548,7 @@ v0.9.1 - 2019-09-16</description>
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Upload Speed</name>
+                                <name>Speedtest Upload</name>
                                 <host>Template Net speedtest.net</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -428,7 +570,7 @@ v0.9.1 - 2019-09-16</description>
                             <dynamic>0</dynamic>
                             <sort_triggers>0</sort_triggers>
                             <resource>
-                                <name>Latency</name>
+                                <name>Speedtest Latency</name>
                                 <host>Template Net speedtest.net</host>
                             </resource>
                             <max_columns>3</max_columns>
@@ -445,6 +587,22 @@ v0.9.1 - 2019-09-16</description>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>Download Speed LOW</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>2</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{Template Net speedtest.net:speedtest.success.last(#1)}&lt;&gt;1</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>Speedtest FAILED</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -475,7 +633,7 @@ v0.9.1 - 2019-09-16</description>
     </triggers>
     <graphs>
         <graph>
-            <name>Download Speed</name>
+            <name>Speedtest Download</name>
             <width>900</width>
             <height>200</height>
             <yaxismin>0.0000</yaxismin>
@@ -507,7 +665,7 @@ v0.9.1 - 2019-09-16</description>
             </graph_items>
         </graph>
         <graph>
-            <name>Latency</name>
+            <name>Speedtest Latency</name>
             <width>900</width>
             <height>200</height>
             <yaxismin>0.0000</yaxismin>
@@ -539,7 +697,7 @@ v0.9.1 - 2019-09-16</description>
             </graph_items>
         </graph>
         <graph>
-            <name>Upload Speed</name>
+            <name>Speedtest Upload</name>
             <width>900</width>
             <height>200</height>
             <yaxismin>0.0000</yaxismin>
