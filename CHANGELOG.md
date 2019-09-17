@@ -3,6 +3,7 @@
 ## v1.1.0 - 2019-09-18
 * Convert from External Check to Zabbix Agent execution
 * Rename items to net.isp.speedtest prefix
+* Rename some files
 
 ## v1.0.0 - 2019-09-17
 * Updated item names and descriptions

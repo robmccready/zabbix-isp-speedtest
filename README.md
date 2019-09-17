@@ -1,19 +1,21 @@
-# zabbix-speedtest.net
-Zabbix template for calling https://www.speedtest.net and recording the results
+# zabbix-isp-speedtest
+Zabbix template for monitoring ISP speed using speedtest.net
 
 
 ## Dependencies
 * [speedtest-cli](https://github.com/sivel/speedtest-cli)
 * [jq](https://github.com/stedolan/jq)
 
-## Installation
+## Installation (on a Zabbix Agent)
 * Install dependencies
-* Copy the speedtest.sh to your Zabbix ExternalScripts location (default: /usr/lib/zabbix/externalscripts)
-* Make sure the script permissions allow the zabbix server to execute them
+* Copy isp-speedtest.sh to your Zabbix ExternalScripts location (default: /usr/lib/zabbix/externalscripts)
+  * Ensure isp-speedtest.sh is executable by the Zabbix Agent user
+* Copy userparameter_isp_speedtest.conf to the Zabbix Agent config folder (default: /etc/zabbix/zabbix_agentd.d)
+  * Restart Zabbix Agent Service
 * Import the template file into the Zabbix UI
 
 ## Setup and Configuration
-* Link the template to the Zabbix Server host
+* Link the template to the Zabbix Agent host 
 * Update the trigger macros if desired
   * {$SPEEDTEST_UPDATE_INTERVAL} default: 3h
   * {$TRIGGER_DOWNLOAD_LOW} default: 100Mbps
