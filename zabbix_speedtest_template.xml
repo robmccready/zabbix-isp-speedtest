@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.0</version>
-    <date>2019-09-17T15:02:00Z</date>
+    <date>2019-09-17T18:40:30Z</date>
     <groups>
         <group>
             <name>Templates/Network devices</name>
@@ -19,7 +19,7 @@ Note: speedtest-cli does not guarantee accuracy but is useful for general trendi
 v1.0.0 - 2019-09-17&#13;
 &#13;
 Maintainer: Rob McCready &lt;rmccready@gmail.com&gt;&#13;
-https://github.com/robmccready/zabbix-plugins</description>
+https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
             <groups>
                 <group>
                     <name>Templates/Network devices</name>
