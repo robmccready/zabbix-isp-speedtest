@@ -3,9 +3,8 @@ Zabbix template for calling https://www.speedtest.net and recording the results
 
 
 ## Dependencies
-* [speedtest-cli](https://packages.ubuntu.com/search?keywords=speedtest-cli)
-  * [speedtest-cli github](https://github.com/sivel/speedtest-cli)
-* [jq](https://packages.ubuntu.com/disco/jq)
+* [speedtest-cli](https://github.com/sivel/speedtest-cli)
+* [jq](https://github.com/stedolan/jq)
 
 ## Installation
 * Install dependencies

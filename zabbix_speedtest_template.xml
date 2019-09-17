@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.0</version>
-    <date>2019-09-17T18:40:30Z</date>
+    <date>2019-09-17T21:57:02Z</date>
     <groups>
         <group>
             <name>Templates/Network devices</name>
@@ -9,17 +9,17 @@
     </groups>
     <templates>
         <template>
-            <template>Template Net speedtest.net</template>
-            <name>Template Net speedtest.net</name>
+            <template>Template Net ISP Speedtest</template>
+            <name>ISP Speedtest</name>
             <description>Monitor internet speed via calls to speedtest.net using speedtest-cli.&#13;
 &#13;
-Note: speedtest-cli does not guarantee accuracy but is useful for general trending and notification when large changes to internet access speed happen. See the &quot;Inconsistency&quot; notes on the speedtest-cli readme: https://github.com/sivel/speedtest-cli&#13;
+Note: speedtest-cli does not guarantee accuracy or consistency with the web based speedtest.net but it is useful for general trending and notification when large changes to internet access speed happen. See the &quot;Inconsistency&quot; notes on the speedtest-cli readme: https://github.com/sivel/speedtest-cli&#13;
 &#13;
 &#13;
-v1.0.0 - 2019-09-17&#13;
+v1.1.0 - 2019-09-18&#13;
 &#13;
 Maintainer: Rob McCready &lt;rmccready@gmail.com&gt;&#13;
-https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
+https://github.com/robmccready/zabbix-isp-speedtest</description>
             <groups>
                 <group>
                     <name>Templates/Network devices</name>
@@ -32,11 +32,70 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
             </applications>
             <items>
                 <item>
+                    <name>Check speed</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>net.isp.speedtest</key>
+                    <delay>{$SPEEDTEST_UPDATE_INTERVAL}</delay>
+                    <history>1w</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>4</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description>Output of a speedtest execution. Actual monitoring happens on the dependent items which pull from the JSON fields</description>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Internet Speed</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                    <preprocessing/>
+                    <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                    <master_item/>
+                </item>
+                <item>
                     <name>Speedtest Download</name>
                     <type>18</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>speedtest.download</key>
+                    <key>net.isp.speedtest.download</key>
                     <delay>0</delay>
                     <history>1w</history>
                     <trends>365d</trends>
@@ -94,7 +153,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                     <verify_peer>0</verify_peer>
                     <verify_host>0</verify_host>
                     <master_item>
-                        <key>speedtest.sh</key>
+                        <key>net.isp.speedtest</key>
                     </master_item>
                 </item>
                 <item>
@@ -102,7 +161,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                     <type>18</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>speedtest.host</key>
+                    <key>net.isp.speedtest.host</key>
                     <delay>0</delay>
                     <history>1w</history>
                     <trends>0</trends>
@@ -160,7 +219,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                     <verify_peer>0</verify_peer>
                     <verify_host>0</verify_host>
                     <master_item>
-                        <key>speedtest.sh</key>
+                        <key>net.isp.speedtest</key>
                     </master_item>
                 </item>
                 <item>
@@ -168,7 +227,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                     <type>18</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>speedtest.latency</key>
+                    <key>net.isp.speedtest.latency</key>
                     <delay>0</delay>
                     <history>1w</history>
                     <trends>365d</trends>
@@ -226,7 +285,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                     <verify_peer>0</verify_peer>
                     <verify_host>0</verify_host>
                     <master_item>
-                        <key>speedtest.sh</key>
+                        <key>net.isp.speedtest</key>
                     </master_item>
                 </item>
                 <item>
@@ -234,7 +293,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                     <type>18</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>speedtest.message</key>
+                    <key>net.isp.speedtest.message</key>
                     <delay>0</delay>
                     <history>1w</history>
                     <trends>0</trends>
@@ -292,74 +351,15 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                     <verify_peer>0</verify_peer>
                     <verify_host>0</verify_host>
                     <master_item>
-                        <key>speedtest.sh</key>
+                        <key>net.isp.speedtest</key>
                     </master_item>
-                </item>
-                <item>
-                    <name>Check speed</name>
-                    <type>10</type>
-                    <snmp_community/>
-                    <snmp_oid/>
-                    <key>speedtest.sh</key>
-                    <delay>{$SPEEDTEST_UPDATE_INTERVAL}</delay>
-                    <history>1w</history>
-                    <trends>0</trends>
-                    <status>0</status>
-                    <value_type>4</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description>Output of a speedtest execution. Actual monitoring happens on the dependent items which pull from the JSON fields</description>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Internet Speed</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                    <preprocessing/>
-                    <jmx_endpoint/>
-                    <timeout>3s</timeout>
-                    <url/>
-                    <query_fields/>
-                    <posts/>
-                    <status_codes>200</status_codes>
-                    <follow_redirects>1</follow_redirects>
-                    <post_type>0</post_type>
-                    <http_proxy/>
-                    <headers/>
-                    <retrieve_mode>0</retrieve_mode>
-                    <request_method>0</request_method>
-                    <output_format>0</output_format>
-                    <allow_traps>0</allow_traps>
-                    <ssl_cert_file/>
-                    <ssl_key_file/>
-                    <ssl_key_password/>
-                    <verify_peer>0</verify_peer>
-                    <verify_host>0</verify_host>
-                    <master_item/>
                 </item>
                 <item>
                     <name>Speedtest Success</name>
                     <type>18</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>speedtest.success</key>
+                    <key>net.isp.speedtest.success</key>
                     <delay>0</delay>
                     <history>1w</history>
                     <trends>0</trends>
@@ -417,7 +417,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                     <verify_peer>0</verify_peer>
                     <verify_host>0</verify_host>
                     <master_item>
-                        <key>speedtest.sh</key>
+                        <key>net.isp.speedtest</key>
                     </master_item>
                 </item>
                 <item>
@@ -425,7 +425,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                     <type>18</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>speedtest.upload</key>
+                    <key>net.isp.speedtest.upload</key>
                     <delay>0</delay>
                     <history>1w</history>
                     <trends>365d</trends>
@@ -483,7 +483,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                     <verify_peer>0</verify_peer>
                     <verify_host>0</verify_host>
                     <master_item>
-                        <key>speedtest.sh</key>
+                        <key>net.isp.speedtest</key>
                     </master_item>
                 </item>
             </items>
@@ -491,22 +491,22 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
             <httptests/>
             <macros>
                 <macro>
-                    <macro>{$SPEEDTEST_UPDATE_INTERVAL}</macro>
-                    <value>3h</value>
-                </macro>
-                <macro>
-                    <macro>{$TRIGGER_DOWNLOAD_LOW}</macro>
+                    <macro>{$SPEEDTEST_TRIGGER_DOWNLOAD_LOW}</macro>
                     <value>100000000</value>
                 </macro>
                 <macro>
-                    <macro>{$TRIGGER_UPLOAD_LOW}</macro>
+                    <macro>{$SPEEDTEST_TRIGGER_UPLOAD_LOW}</macro>
                     <value>8000000</value>
+                </macro>
+                <macro>
+                    <macro>{$SPEEDTEST_UPDATE_INTERVAL}</macro>
+                    <value>3h</value>
                 </macro>
             </macros>
             <templates/>
             <screens>
                 <screen>
-                    <name>SpeedTest</name>
+                    <name>ISP Speedtest</name>
                     <hsize>1</hsize>
                     <vsize>3</vsize>
                     <screen_items>
@@ -527,7 +527,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                             <sort_triggers>0</sort_triggers>
                             <resource>
                                 <name>Speedtest Download</name>
-                                <host>Template Net speedtest.net</host>
+                                <host>Template Net ISP Speedtest</host>
                             </resource>
                             <max_columns>3</max_columns>
                             <application/>
@@ -549,7 +549,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                             <sort_triggers>0</sort_triggers>
                             <resource>
                                 <name>Speedtest Upload</name>
-                                <host>Template Net speedtest.net</host>
+                                <host>Template Net ISP Speedtest</host>
                             </resource>
                             <max_columns>3</max_columns>
                             <application/>
@@ -571,7 +571,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                             <sort_triggers>0</sort_triggers>
                             <resource>
                                 <name>Speedtest Latency</name>
-                                <host>Template Net speedtest.net</host>
+                                <host>Template Net ISP Speedtest</host>
                             </resource>
                             <max_columns>3</max_columns>
                             <application/>
@@ -583,7 +583,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
     </templates>
     <triggers>
         <trigger>
-            <expression>{Template Net speedtest.net:speedtest.download.last(#1)}&lt;{$TRIGGER_DOWNLOAD_LOW}</expression>
+            <expression>{Template Net ISP Speedtest:net.isp.speedtest.download.last(#1)}&lt;{$SPEEDTEST_TRIGGER_DOWNLOAD_LOW}</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>Download Speed LOW</name>
@@ -594,12 +594,12 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
             <priority>2</priority>
             <description/>
             <type>0</type>
-            <manual_close>0</manual_close>
+            <manual_close>1</manual_close>
             <dependencies/>
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template Net speedtest.net:speedtest.success.last(#1)}&lt;&gt;1</expression>
+            <expression>{Template Net ISP Speedtest:net.isp.speedtest.success.last(#1)}&lt;&gt;1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>Speedtest FAILED</name>
@@ -610,12 +610,12 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
             <priority>2</priority>
             <description/>
             <type>0</type>
-            <manual_close>0</manual_close>
+            <manual_close>1</manual_close>
             <dependencies/>
             <tags/>
         </trigger>
         <trigger>
-            <expression>{Template Net speedtest.net:speedtest.upload.last(#1)}&lt;{$TRIGGER_UPLOAD_LOW}</expression>
+            <expression>{Template Net ISP Speedtest:net.isp.speedtest.upload.last(#1)}&lt;{$SPEEDTEST_TRIGGER_UPLOAD_LOW}</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>Upload Speed LOW</name>
@@ -626,7 +626,7 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
             <priority>2</priority>
             <description/>
             <type>0</type>
-            <manual_close>0</manual_close>
+            <manual_close>1</manual_close>
             <dependencies/>
             <tags/>
         </trigger>
@@ -658,8 +658,8 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                     <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Template Net speedtest.net</host>
-                        <key>speedtest.download</key>
+                        <host>Template Net ISP Speedtest</host>
+                        <key>net.isp.speedtest.download</key>
                     </item>
                 </graph_item>
             </graph_items>
@@ -690,8 +690,8 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                     <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Template Net speedtest.net</host>
-                        <key>speedtest.latency</key>
+                        <host>Template Net ISP Speedtest</host>
+                        <key>net.isp.speedtest.latency</key>
                     </item>
                 </graph_item>
             </graph_items>
@@ -722,8 +722,8 @@ https://github.com/robmccready/zabbix-externalcheck-speedtest.net</description>
                     <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Template Net speedtest.net</host>
-                        <key>speedtest.upload</key>
+                        <host>Template Net ISP Speedtest</host>
+                        <key>net.isp.speedtest.upload</key>
                     </item>
                 </graph_item>
             </graph_items>
