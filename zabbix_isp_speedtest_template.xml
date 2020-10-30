@@ -10,7 +10,7 @@
     <templates>
         <template>
             <template>Template Net ISP Speedtest</template>
-            <name>ISP Speedtest (atd)</name>
+            <name>ISP Speedtest</name>
             <description>Monitor internet speed via calls to speedtest.net using speedtest-cli.&#13;
 &#13;
 Note: speedtest-cli does not guarantee accuracy or consistency with the web based speedtest.net but it is useful for general trending and notification when large changes to internet access speed happen. See the &quot;Inconsistency&quot; notes on the speedtest-cli readme: https://github.com/sivel/speedtest-cli&#13;
@@ -268,8 +268,8 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                             <resourcetype>0</resourcetype>
                             <style>0</style>
                             <resource>
-                                <name>Speedtest Download2</name>
-                                <host>Template Net ISP Speedtest - atd</host>
+                                <name>Speedtest Download</name>
+                                <host>Template Net ISP Speedtest</host>
                             </resource>
                             <width>500</width>
                             <height>100</height>
@@ -290,8 +290,8 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                             <resourcetype>0</resourcetype>
                             <style>0</style>
                             <resource>
-                                <name>Speedtest Upload2</name>
-                                <host>Template Net ISP Speedtest - atd</host>
+                                <name>Speedtest Upload</name>
+                                <host>Template Net ISP Speedtest</host>
                             </resource>
                             <width>500</width>
                             <height>100</height>
@@ -312,8 +312,8 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                             <resourcetype>0</resourcetype>
                             <style>0</style>
                             <resource>
-                                <name>Speedtest Latency2</name>
-                                <host>Template Net ISP Speedtest - atd</host>
+                                <name>Speedtest Latency</name>
+                                <host>Template Net ISP Speedtest</host>
                             </resource>
                             <width>500</width>
                             <height>100</height>
@@ -337,7 +337,7 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
     </templates>
     <graphs>
         <graph>
-            <name>All-in-one2</name>
+            <name>All-in-one</name>
             <show_triggers>NO</show_triggers>
             <ymin_type_1>FIXED</ymin_type_1>
             <graph_items>
@@ -347,7 +347,7 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                     <color>6DFFCF</color>
                     <yaxisside>RIGHT</yaxisside>
                     <item>
-                        <host>Template Net ISP Speedtest - atd</host>
+                        <host>Template Net ISP Speedtest</host>
                         <key>net.isp.speedtest.download</key>
                     </item>
                 </graph_item>
@@ -357,7 +357,7 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                     <color>BF71FF</color>
                     <yaxisside>RIGHT</yaxisside>
                     <item>
-                        <host>Template Net ISP Speedtest - atd</host>
+                        <host>Template Net ISP Speedtest</host>
                         <key>net.isp.speedtest.upload</key>
                     </item>
                 </graph_item>
@@ -365,49 +365,49 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                     <sortorder>3</sortorder>
                     <color>FFFFFF</color>
                     <item>
-                        <host>Template Net ISP Speedtest - atd</host>
+                        <host>Template Net ISP Speedtest</host>
                         <key>net.isp.speedtest.latency</key>
                     </item>
                 </graph_item>
             </graph_items>
         </graph>
         <graph>
-            <name>Speedtest Download2</name>
+            <name>Speedtest Download</name>
             <graph_items>
                 <graph_item>
                     <sortorder>1</sortorder>
                     <drawtype>BOLD_LINE</drawtype>
                     <color>6DFFCF</color>
                     <item>
-                        <host>Template Net ISP Speedtest - atd</host>
+                        <host>Template Net ISP Speedtest</host>
                         <key>net.isp.speedtest.download</key>
                     </item>
                 </graph_item>
             </graph_items>
         </graph>
         <graph>
-            <name>Speedtest Latency2</name>
+            <name>Speedtest Latency</name>
             <ymin_type_1>FIXED</ymin_type_1>
             <graph_items>
                 <graph_item>
                     <sortorder>1</sortorder>
                     <color>FFFFFF</color>
                     <item>
-                        <host>Template Net ISP Speedtest - atd</host>
+                        <host>Template Net ISP Speedtest</host>
                         <key>net.isp.speedtest.latency</key>
                     </item>
                 </graph_item>
             </graph_items>
         </graph>
         <graph>
-            <name>Speedtest Upload2</name>
+            <name>Speedtest Upload</name>
             <graph_items>
                 <graph_item>
                     <sortorder>1</sortorder>
                     <drawtype>BOLD_LINE</drawtype>
                     <color>BF71FF</color>
                     <item>
-                        <host>Template Net ISP Speedtest - atd</host>
+                        <host>Template Net ISP Speedtest</host>
                         <key>net.isp.speedtest.upload</key>
                     </item>
                 </graph_item>
