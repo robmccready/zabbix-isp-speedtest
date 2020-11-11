@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>5.0</version>
-    <date>2020-11-11T05:40:09Z</date>
+    <date>2020-11-11T06:05:57Z</date>
     <groups>
         <group>
             <name>Templates/Network devices</name>
@@ -16,7 +16,7 @@
 Note: speedtest-cli does not guarantee accuracy or consistency with the web based speedtest.net but it is useful for general trending and notification when large changes to internet access speed happen. See the &quot;Inconsistency&quot; notes on the speedtest-cli readme: https://github.com/sivel/speedtest-cli&#13;
 &#13;
 &#13;
-v2.0.1 - 2020-11-10&#13;
+v2.0.2 - 2020-11-10&#13;
 &#13;
 Maintainer: Rob McCready &lt;rmccready@gmail.com&gt;&#13;
 https://github.com/robmccready/zabbix-isp-speedtest</description>
@@ -112,6 +112,14 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                     <master_item>
                         <key>net.isp.speedtest.results</key>
                     </master_item>
+                    <triggers>
+                        <trigger>
+                            <expression>{last({$SPEEDTEST_TRIGGER_AVG_COUNT})}&lt;{$SPEEDTEST_TRIGGER_LATENCY_HIGH}</expression>
+                            <name>Latency HIGH</name>
+                            <priority>WARNING</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
                 </item>
                 <item>
                     <name>Speedtest Message</name>
@@ -248,12 +256,17 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                 <macro>
                     <macro>{$SPEEDTEST_TRIGGER_DOWNLOAD_LOW}</macro>
                     <value>100000000</value>
-                    <description>Download speed below which an alert will be raised</description>
+                    <description>Download speed(bps) below which an alert will be raised</description>
+                </macro>
+                <macro>
+                    <macro>{$SPEEDTEST_TRIGGER_LATENCY_HIGH}</macro>
+                    <value>50</value>
+                    <description>Latency(ms) above which to alert</description>
                 </macro>
                 <macro>
                     <macro>{$SPEEDTEST_TRIGGER_UPLOAD_LOW}</macro>
                     <value>8000000</value>
-                    <description>Upload speed below which an alert will be raised</description>
+                    <description>Upload speed(bps) below which an alert will be raised</description>
                 </macro>
                 <macro>
                     <macro>{$SPEEDTEST_UPDATE_INTERVAL}</macro>
