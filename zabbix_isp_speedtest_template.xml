@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>5.0</version>
-    <date>2020-10-30T04:32:42Z</date>
+    <date>2020-11-11T05:40:09Z</date>
     <groups>
         <group>
             <name>Templates/Network devices</name>
@@ -16,7 +16,7 @@
 Note: speedtest-cli does not guarantee accuracy or consistency with the web based speedtest.net but it is useful for general trending and notification when large changes to internet access speed happen. See the &quot;Inconsistency&quot; notes on the speedtest-cli readme: https://github.com/sivel/speedtest-cli&#13;
 &#13;
 &#13;
-v2.0.0 - 2020-10-30&#13;
+v2.0.1 - 2020-11-10&#13;
 &#13;
 Maintainer: Rob McCready &lt;rmccready@gmail.com&gt;&#13;
 https://github.com/robmccready/zabbix-isp-speedtest</description>
@@ -32,40 +32,12 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
             </applications>
             <items>
                 <item>
-                    <name>Speedtest Results</name>
-                    <type>TRAP</type>
-                    <key>net.isp.speedtest.results</key>
-                    <delay>0</delay>
-                    <history>1w</history>
-                    <trends>0</trends>
-                    <value_type>TEXT</value_type>
-                    <description>Output of a speedtest execution. Actual monitoring happens on the dependent items which pull from the JSON fields</description>
-                    <applications>
-                        <application>
-                            <name>Internet Speed</name>
-                        </application>
-                    </applications>
-                </item>
-                <item>
-                    <name>Speedtest Trigger</name>
-                    <key>net.isp.speedtest.trigger[localhost, 10051, {$SPEEDTEST_SENDER_HOST}, {$SPEEDTEST_SERVER_ID}]</key>
-                    <delay>{$SPEEDTEST_UPDATE_INTERVAL}</delay>
-                    <history>1w</history>
-                    <trends>0</trends>
-                    <value_type>TEXT</value_type>
-                    <description>Scheduled item that triggers a speedtest.</description>
-                    <applications>
-                        <application>
-                            <name>Internet Speed</name>
-                        </application>
-                    </applications>
-                </item>
-                <item>
                     <name>Speedtest Download</name>
                     <type>DEPENDENT</type>
                     <key>net.isp.speedtest.download</key>
                     <delay>0</delay>
                     <history>1w</history>
+                    <trends>750d</trends>
                     <value_type>FLOAT</value_type>
                     <units>b</units>
                     <description>Records download speed (bps)</description>
@@ -122,9 +94,10 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                     <key>net.isp.speedtest.latency</key>
                     <delay>0</delay>
                     <history>1w</history>
+                    <trends>750d</trends>
                     <value_type>FLOAT</value_type>
                     <units>ms</units>
-                    <description>Records the latency to the host used for the speedtest. Not intended to be as accurate as an ICMP test</description>
+                    <description>Records the latency to the host used for the speedtest. Not intended to be as accurate as an ICMP test. By default the speedtest cycles between a random set of local servers so the latency may vary with server selection.</description>
                     <applications>
                         <application>
                             <name>Internet Speed</name>
@@ -165,6 +138,21 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                     </master_item>
                 </item>
                 <item>
+                    <name>Speedtest Results</name>
+                    <type>TRAP</type>
+                    <key>net.isp.speedtest.results</key>
+                    <delay>0</delay>
+                    <history>1w</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Output of a speedtest execution. Actual monitoring happens on the dependent items which pull from the JSON fields</description>
+                    <applications>
+                        <application>
+                            <name>Internet Speed</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
                     <name>Speedtest Success</name>
                     <type>DEPENDENT</type>
                     <key>net.isp.speedtest.success</key>
@@ -196,11 +184,26 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                     </triggers>
                 </item>
                 <item>
+                    <name>Speedtest Trigger</name>
+                    <key>net.isp.speedtest.trigger[localhost, 10051, {$SPEEDTEST_SENDER_HOST}, {$SPEEDTEST_SERVER_ID}]</key>
+                    <delay>{$SPEEDTEST_UPDATE_INTERVAL}</delay>
+                    <history>1w</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Scheduled item that triggers a speedtest.</description>
+                    <applications>
+                        <application>
+                            <name>Internet Speed</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
                     <name>Speedtest Upload</name>
                     <type>DEPENDENT</type>
                     <key>net.isp.speedtest.upload</key>
                     <delay>0</delay>
                     <history>1w</history>
+                    <trends>750d</trends>
                     <value_type>FLOAT</value_type>
                     <units>b</units>
                     <description>Records upload speed (bps)</description>
@@ -337,47 +340,12 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
     </templates>
     <graphs>
         <graph>
-            <name>All-in-one</name>
-            <show_triggers>NO</show_triggers>
-            <ymin_type_1>FIXED</ymin_type_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <drawtype>BOLD_LINE</drawtype>
-                    <color>6DFFCF</color>
-                    <yaxisside>RIGHT</yaxisside>
-                    <item>
-                        <host>Template Net ISP Speedtest</host>
-                        <key>net.isp.speedtest.download</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>2</sortorder>
-                    <drawtype>BOLD_LINE</drawtype>
-                    <color>BF71FF</color>
-                    <yaxisside>RIGHT</yaxisside>
-                    <item>
-                        <host>Template Net ISP Speedtest</host>
-                        <key>net.isp.speedtest.upload</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>3</sortorder>
-                    <color>FFFFFF</color>
-                    <item>
-                        <host>Template Net ISP Speedtest</host>
-                        <key>net.isp.speedtest.latency</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
             <name>Speedtest Download</name>
             <graph_items>
                 <graph_item>
                     <sortorder>1</sortorder>
                     <drawtype>BOLD_LINE</drawtype>
-                    <color>6DFFCF</color>
+                    <color>90CAF9</color>
                     <item>
                         <host>Template Net ISP Speedtest</host>
                         <key>net.isp.speedtest.download</key>
@@ -391,7 +359,42 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
             <graph_items>
                 <graph_item>
                     <sortorder>1</sortorder>
-                    <color>FFFFFF</color>
+                    <color>E53935</color>
+                    <item>
+                        <host>Template Net ISP Speedtest</host>
+                        <key>net.isp.speedtest.latency</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Speedtest Summary</name>
+            <show_work_period>NO</show_work_period>
+            <show_triggers>NO</show_triggers>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>90CAF9</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <item>
+                        <host>Template Net ISP Speedtest</host>
+                        <key>net.isp.speedtest.download</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>1565C0</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <item>
+                        <host>Template Net ISP Speedtest</host>
+                        <key>net.isp.speedtest.upload</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>E53935</color>
                     <item>
                         <host>Template Net ISP Speedtest</host>
                         <key>net.isp.speedtest.latency</key>
@@ -405,7 +408,7 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                 <graph_item>
                     <sortorder>1</sortorder>
                     <drawtype>BOLD_LINE</drawtype>
-                    <color>BF71FF</color>
+                    <color>1565C0</color>
                     <item>
                         <host>Template Net ISP Speedtest</host>
                         <key>net.isp.speedtest.upload</key>
