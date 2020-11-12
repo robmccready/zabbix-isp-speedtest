@@ -1,13 +1,15 @@
 # zabbix-isp-speedtest
-Zabbix template for monitoring ISP speed using speedtest.net
+Zabbix template for monitoring ISP speeds using speedtest.net. 
 
+To avoid timeouts when executing the speed test this template uses a combination of a trigger item and a trap item to asynchronously execute the speed test.
+
+Latest version is v2.0.3 (2020-11-11). [Change Log](CHANGELOG.md)
 
 ## Dependencies
 * [speedtest-cli](https://github.com/sivel/speedtest-cli)
 * [jq](https://github.com/stedolan/jq)
 * atd job scheduler
 * [zabbix_sender](https://www.zabbix.com/documentation/current/manual/concepts/sender)
-
 
 ## Installation (on a Zabbix Agent)
 * Install dependencies
@@ -16,20 +18,43 @@ Zabbix template for monitoring ISP speed using speedtest.net
 * Copy userparameter_isp_speedtest.conf to the Zabbix Agent config folder (default: /etc/zabbix/zabbix_agentd.d)
   * Restart Zabbix Agent Service
 * Import the template file into the Zabbix UI
+* Link the template to a Zabbix Agent host
 
-## Setup and Configuration
-* Link the template to the Zabbix Agent host 
-* Update the templace macros if needed
-  * {$SPEEDTEST_SENDER_HOST} default: Zabbix server - replace with name of the host the template is applied to
-  * {$SPEEDTEST_SERVER_ID} default: blank - fill in to lock speedtest to a specific server (speedtest --list for available servers)
-  * {$SPEEDTEST_UPDATE_INTERVAL} default: 3h
-  * {$TRIGGER_DOWNLOAD_LOW} default: 100Mbps
-  * {$TRIGGER_UPLOAD_LOW} default: 8Mbps
-  * {$SPEEDTEST_TRIGGER_AVG_COUNT} default: 3
+## Configuration
 
-### Template Items
-* Speedtest Trigger (3hr refresh default - calls isp-speedtest-trigger-atjob.sh)
-* Speedtest Results (trapper item - recieves data from isp-speedtest-sender.sh)
+**Sender Macros**
+
+The agent running the speedtest uses the zabbix sender to post the results back to the Zabbix server.
+
+* **SPEEDTEST_SENDER_SERVER** (default: localhost): The hostname or IP address of the Zabbix server to send the results to
+
+* **SPEEDTEST_SENDER_PORT** (default: 10051): The port of the Zabbix server
+
+* **SPEEDTEST_SENDER_HOST** (default: Zabbix server): The host that the template is applied to so the sender can find the results item.
+
+**Speedtest Macros**
+
+Configure the execution of the speedtest runs
+
+* **SPEEDTEST_UPDATE_INTERVAL** (default: 3h): How often to run the speedtest
+
+* **SPEEDTEST_SERVER_ID** (default: blank): If filled in it will lock speedtest to a specific server (speedtest --list for available servers)
+
+**Trigger Macros**
+
+Configure trigger values for alerts
+
+* **SPEEDTEST_TRIGGER_AVG_COUNT** (default: 3): Average values evaluated by triggers to prevent one bad run causing alerts
+
+* **SPEEDTEST_TRIGGER_DOWNLOAD_LOW** (default: 100Mbps): Trigger when average download speeds fall below
+
+* **SPEEDTEST_TRIGGER_UPLOAD_LOW** (default: 8Mbps): Trigger when average upload speeds fall below
+
+* **SPEEDTEST_TRIGGER_LATENCY_HIGH** (default: 50ms): Trigger when average latency is above
+  
+## Template Items
+* Speedtest Trigger (calls isp-speedtest-trigger-atjob script)
+* Speedtest Results (trapper item - recieves data from isp-speedtest-sender script)
   * Speedtest Download
   * Speedtest Upload
   * Speedtest Host (track which speedtest server gets used)
@@ -37,15 +62,16 @@ Zabbix template for monitoring ISP speed using speedtest.net
   * Speedtest Success (boolean value if execution succeeded)
   * Speedtest Message (error message if any)
 
-### Template Triggers
+## Template Triggers
 * Speedtest FAILED
 * Download Speed LOW
 * Upload Speed LOW
+* Latency HIGH
 
-### Template Graphs
+## Template Graphs
 * Download speed
 * Upload speed
 * Latency
-* All-in-one graph with download, upload, and latency
+* Summary graph with download, upload, and latency
 
-All 3 graphs are included on a monitoring screen as well
+The 3 individual graphs are included on a monitoring screen as well

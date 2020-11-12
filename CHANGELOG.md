@@ -1,7 +1,15 @@
 # zabbix-speedtest.net change log
 
+## v2.0.3 - 2020-11-11
+* Rename All-In-One report to "Speedtest Summary"
+ * Update graph colors and summary graph to be cleaner
+* Add high latency trigger (default 50ms)
+* Increase Trend Histories to 750d to allow year on year comparison
+* Add macros for configuring zabbix server/port for sender
+
+
 ## v2.0.0 - 2020-10-30
-Scripts refactored to leverage atd and zabbix_sender to disconnect the execution of the speedtest from the zabbix maximum timeout of 30 seconds.[Escaping timeouts wiht atd](https://zabbix.org/wiki/Escaping_timeouts_with_atd)
+Scripts refactored to leverage atd and zabbix_sender to disconnect the execution of the speedtest from the zabbix maximum timeout of 30 seconds.[Escaping timeouts with atd](https://zabbix.org/wiki/Escaping_timeouts_with_atd)
 * Add trigger script isp-speedtest-trigger-atjob.sh
 * Refactor (and rename) speedtest script to use zabbix_sender: isp-speedtest-sender.sh
 * Add support for specified speedtest server ID (speedtest --server <ID>)
