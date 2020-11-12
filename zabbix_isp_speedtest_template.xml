@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>5.0</version>
-    <date>2020-11-11T06:05:57Z</date>
+    <date>2020-11-12T01:54:43Z</date>
     <groups>
         <group>
             <name>Templates/Network devices</name>
@@ -16,7 +16,7 @@
 Note: speedtest-cli does not guarantee accuracy or consistency with the web based speedtest.net but it is useful for general trending and notification when large changes to internet access speed happen. See the &quot;Inconsistency&quot; notes on the speedtest-cli readme: https://github.com/sivel/speedtest-cli&#13;
 &#13;
 &#13;
-v2.0.2 - 2020-11-10&#13;
+v2.0.3 - 2020-11-11&#13;
 &#13;
 Maintainer: Rob McCready &lt;rmccready@gmail.com&gt;&#13;
 https://github.com/robmccready/zabbix-isp-speedtest</description>
@@ -193,12 +193,12 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                 </item>
                 <item>
                     <name>Speedtest Trigger</name>
-                    <key>net.isp.speedtest.trigger[localhost, 10051, {$SPEEDTEST_SENDER_HOST}, {$SPEEDTEST_SERVER_ID}]</key>
+                    <key>net.isp.speedtest.trigger[{$SPEEDTEST_SENDER_SERVER}, {$SPEEDTEST_SENDER_PORT}, {$SPEEDTEST_SENDER_HOST}, {$SPEEDTEST_SERVER_ID}]</key>
                     <delay>{$SPEEDTEST_UPDATE_INTERVAL}</delay>
                     <history>1w</history>
                     <trends>0</trends>
                     <value_type>TEXT</value_type>
-                    <description>Scheduled item that triggers a speedtest.</description>
+                    <description>Scheduled item that triggers a speedtest. Results will be posted back to the results item asynchronously,</description>
                     <applications>
                         <application>
                             <name>Internet Speed</name>
@@ -243,6 +243,17 @@ https://github.com/robmccready/zabbix-isp-speedtest</description>
                 <macro>
                     <macro>{$SPEEDTEST_SENDER_HOST}</macro>
                     <value>Zabbix server</value>
+                    <description>The name of the host that the template is applied to. Used so the sender can find the trapper item to send results to</description>
+                </macro>
+                <macro>
+                    <macro>{$SPEEDTEST_SENDER_PORT}</macro>
+                    <value>10051</value>
+                    <description>Port the zabbix server is listening on to send data to</description>
+                </macro>
+                <macro>
+                    <macro>{$SPEEDTEST_SENDER_SERVER}</macro>
+                    <value>localhost</value>
+                    <description>Name/IP of the zabbix server to send results to from the agent</description>
                 </macro>
                 <macro>
                     <macro>{$SPEEDTEST_SERVER_ID}</macro>
