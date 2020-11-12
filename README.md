@@ -54,7 +54,7 @@ Configure trigger values for alerts
   
 ## Template Items
 * Speedtest Trigger (calls isp-speedtest-trigger-atjob script)
-* Speedtest Results (trapper item - recieves data from isp-speedtest-sender script)
+* Speedtest Results (trapper item - receives data from isp-speedtest-sender script)
   * Speedtest Download
   * Speedtest Upload
   * Speedtest Host (track which speedtest server gets used)
