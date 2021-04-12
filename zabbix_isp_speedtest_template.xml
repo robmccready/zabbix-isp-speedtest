@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>5.0</version>
-    <date>2020-11-12T01:54:43Z</date>
+    <date>2021-04-12T23:12:46Z</date>
     <groups>
         <group>
             <name>Templates/Network devices</name>
@@ -16,7 +16,7 @@
 Note: speedtest-cli does not guarantee accuracy or consistency with the web based speedtest.net but it is useful for general trending and notification when large changes to internet access speed happen. See the &quot;Inconsistency&quot; notes on the speedtest-cli readme: https://github.com/sivel/speedtest-cli&#13;
 &#13;
 &#13;
-v2.0.3 - 2020-11-11&#13;
+v2.0.4 - 2021-04-12&#13;
 &#13;
 Maintainer: Rob McCready &lt;rmccready@gmail.com&gt;&#13;
 https://github.com/robmccready/zabbix-isp-speedtest</description>

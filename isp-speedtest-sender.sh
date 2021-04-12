@@ -59,7 +59,8 @@ fi
 
 retVal=$?
 if [ $retVal -ne 0 ]; then
-  zabbix_send "{\"success\": 0, \"message\": \"speedtest failure code [$retVal], output: [${SPEEDTEST_OUTPUT}]\"}"
+  SPEEDTEST_OUTPUT=$(echo $SPEEDTEST_OUTPUT | sed 's/\"//g')
+  zabbix_send "{\"success\": 0, \"message\": \"speedtest failure code [$retVal], output: [${SPEEDTEST_OUTPUT}]\", \"latency\": 0, \"download\": 0, \"upload\": 0, \"host\": null}"
   exit 1
 fi
 

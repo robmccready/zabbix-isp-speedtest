@@ -1,5 +1,8 @@
 # zabbix-speedtest.net change log
 
+## v2.0.4 - 2021-04-12
+* Escape quotes in error message passed back to zabbix. Handles odd issue with recent (now fixed) bug in speedtest-cli [Handle case where ignoreids is empty or contains empty ids](https://github.com/sivel/speedtest-cli/commit/cadc68b5aef20f28648072cf07a8f155639b81dd)
+
 ## v2.0.3 - 2020-11-11
 * Rename All-In-One report to "Speedtest Summary"
  * Update graph colors and summary graph to be cleaner
