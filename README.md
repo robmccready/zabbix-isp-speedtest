@@ -3,7 +3,7 @@ Zabbix template for monitoring ISP speeds using speedtest.net.
 
 To avoid timeouts when executing the speed test this template uses a combination of a trigger item and a trap item to asynchronously execute the speed test.
 
-Latest version is v2.0.4 (2021-04-12). [Change Log](CHANGELOG.md)
+Latest version is v2.0.5 (2022-10-12). [Change Log](CHANGELOG.md)
 
 ## Limitations
 * This template uses [External Checks](https://www.zabbix.com/documentation/2.2/manual/config/items/itemtypes/external) which are only supported on the Zabbix Server or a Proxy.
