@@ -1,5 +1,9 @@
 # zabbix-speedtest.net change log
 
+## v2.0.5 - 2022-10-12
+* Fix [Issue 7](https://github.com/robmccready/zabbix-isp-speedtest/issues/7)
+* Fix [Issue 8](https://github.com/robmccready/zabbix-isp-speedtest/issues/8)
+
 ## v2.0.4 - 2021-04-12
 * Escape quotes in error message passed back to zabbix. Handles odd issue with recent (now fixed) bug in speedtest-cli [Handle case where ignoreids is empty or contains empty ids](https://github.com/sivel/speedtest-cli/commit/cadc68b5aef20f28648072cf07a8f155639b81dd)
 
