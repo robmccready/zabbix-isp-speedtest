@@ -5,20 +5,23 @@ To avoid timeouts when executing the speed test this template uses a combination
 
 Latest version is v2.0.5 (2022-10-12). [Change Log](CHANGELOG.md)
 
+## Limitations
+* This template uses [External Checks](https://www.zabbix.com/documentation/2.2/manual/config/items/itemtypes/external) which are only supported on the Zabbix Server or a Proxy.
+
 ## Dependencies
 * [speedtest-cli](https://github.com/sivel/speedtest-cli)
 * [jq](https://github.com/stedolan/jq)
-* atd job scheduler
 * [zabbix_sender](https://www.zabbix.com/documentation/current/manual/concepts/sender)
+* atd job scheduler
 
-## Installation (on a Zabbix Agent)
+## Installation (on a Zabbix Server)
 * Install dependencies
 * Copy isp-speedtest-trigger-atjob.sh and isp-speedtest-sender.sh to your Zabbix ExternalScripts location (default: /usr/lib/zabbix/externalscripts)
   * Ensure both scripts are executable by the Zabbix Agent user
 * Copy userparameter_isp_speedtest.conf to the Zabbix Agent config folder (default: /etc/zabbix/zabbix_agentd.d)
   * Restart Zabbix Agent Service
 * Import the template file into the Zabbix UI
-* Link the template to a Zabbix Agent host
+* Link the template to the host
 
 ## Configuration
 
