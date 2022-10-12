@@ -52,9 +52,9 @@ fi
 # Perform speedtest and check exit code
 #
 if [ -z "$speedtest_server_id" ]; then
-	SPEEDTEST_OUTPUT=$(speedtest --json 2>&1)
+	SPEEDTEST_OUTPUT=$(speedtest --secure --json 2>&1)
 else
-	SPEEDTEST_OUTPUT=$(speedtest --json --server ${speedtest_server_id} 2>&1)
+	SPEEDTEST_OUTPUT=$(speedtest --secure --json --server ${speedtest_server_id} 2>&1)
 fi
 
 retVal=$?
